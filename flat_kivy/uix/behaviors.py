@@ -29,15 +29,16 @@ class ThemeBehavior(object):
             app = App.get_running_app()
             theme = app.theme_manager.get_theme(value[0], value[1])
             types = app.theme_manager.get_theme_types()
-            for each in types:
-                if isinstance(self, types[each]):
-                    try:
-                        theme_def = theme[each]
-                    except:
-                        print(each, 'not in theme', value[0], value[1], self)
-                        continue
-                    for propname in theme_def:
-                        setattr(self, propname, theme_def[propname])
+
+            # Lookup the theme definition directly from the class name.
+            name = self.__class__.__name__
+            try:
+                theme_def = theme[name]
+            except KeyError:
+                print(name, 'not in theme', value[0], value[1], self)
+            else:
+                for propname in theme_def:
+                    setattr(self, propname, theme_def[propname])
 
 
 class GrabBehavior(object):
