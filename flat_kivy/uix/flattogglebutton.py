@@ -15,7 +15,7 @@ class FlatToggleButton(FlatButtonBase, ToggleButtonBehavior, AnchorLayout):
             if self.collide_point(touch.x, touch.y) and self.state == 'normal':
                 super(FlatToggleButton, self).on_touch_down(touch)
         else:
-            super(FlatToggleButton, self).on_touch_down(touch)
+            return super(FlatToggleButton, self).on_touch_down(touch)
 
 
 class RaisedFlatToggleButton(RaisedStyle, FlatToggleButton):

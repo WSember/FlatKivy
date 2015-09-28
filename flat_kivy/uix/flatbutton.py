@@ -26,6 +26,12 @@ class FlatButtonBase(GrabBehavior, LogBehavior, TouchRippleBehavior,
     def on_color(self, instance, value):
         self.color_down = [x*.7 for x in value]
 
+    def on_touch_down(self, touch):
+        super(FlatButtonBase, self).on_touch_down(touch)
+
+        if self.collide_point(*touch.pos):
+            return True
+
 
 class FlatButton(FlatButtonBase, ButtonBehavior, AnchorLayout):
     pass

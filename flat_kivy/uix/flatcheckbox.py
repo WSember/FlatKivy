@@ -71,21 +71,21 @@ class FlatCheckBox(GrabBehavior, TouchRippleBehavior,
             if self.collide_point(touch.x, touch.y):
                 return False
         else:
-            super(FlatCheckBox, self).on_touch_down(touch)
+            return super(FlatCheckBox, self).on_touch_down(touch)
 
     def on_touch_move(self, touch):
         if self.no_interact:
             if self.collide_point(touch.x, touch.y):
                 return False
         else:
-            super(FlatCheckBox, self).on_touch_move(touch)
+            return super(FlatCheckBox, self).on_touch_move(touch)
 
     def on_touch_up(self, touch):
         if self.no_interact:
             if self.collide_point(touch.x, touch.y):
                 return False
         else:
-            super(FlatCheckBox, self).on_touch_up(touch)
+            return super(FlatCheckBox, self).on_touch_up(touch)
 
 
 class FlatCheckBoxListItem(GrabBehavior, TouchRippleBehavior,
