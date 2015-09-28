@@ -5,6 +5,7 @@ from kivy.lang import Builder
 
 from flat_kivy.flatapp import FlatApp
 from flat_kivy.uix.flattextinput import FlatTextInput
+from flat_kivy.uix.floatingwidget import FloatingWidget
 
 Builder.load_string('''
 <RootWidget>:
@@ -126,6 +127,17 @@ Builder.load_string('''
             orientation: 'horizontal'
             disabled: True
             theme: ('green', 'main')
+
+        Widget:
+            FloatingWidget:
+                target: root
+                pos_rel: 0.5, 0.0
+                padding: '8dp'
+                size: 82, 32
+
+                FlatButton:
+                    text: 'Floating'
+                    theme: ('green', 'accent')
 ''')
 
 
