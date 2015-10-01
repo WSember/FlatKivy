@@ -1,6 +1,6 @@
 
 from kivy.properties import (NumericProperty, ReferenceListProperty,
-                             ObjectProperty)
+                             ObjectProperty, BooleanProperty)
 from kivy.uix.widget import Widget
 
 
@@ -25,9 +25,12 @@ class FloatingWidget(Widget):
 
     target = ObjectProperty(None)
 
+    hidden = BooleanProperty(False)
+
     def __init__(self, **kw):
         super(FloatingWidget, self).__init__(**kw)
         self._prev_target = None
+        self._saved_parent = self.parent
 
         self.bind(
             padding=self._update,
@@ -40,6 +43,18 @@ class FloatingWidget(Widget):
             raise ValueError("FloatingWidget only accepts one child.")
 
         super(FloatingWidget, self).add_widget(w, **kw)
+
+    def on_hidden(self, *ar):
+        if self.hidden:
+            # hide if not already hidden
+            if self.parent is not None:
+                self._saved_parent = self.parent
+                self.parent.remove_widget(self)
+        else:
+            # unhide if hidden (and we can unhide)
+            if self.parent is None:
+                if self._saved_parent is not None:
+                    self._saved_parent.add_widget(self)
 
     def on_pos(self, *ar):
         if self.children:
