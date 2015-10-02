@@ -56,6 +56,13 @@ class FloatingWidget(Widget):
                 if self._saved_parent is not None:
                     self._saved_parent.add_widget(self)
 
+    def on_parent(self, *ar):
+        """
+        Keep _saved_parent updated.
+        """
+        if self.parent is not None:
+            self._saved_parent = self.parent
+
     def on_pos(self, *ar):
         if self.children:
             self.children[0].pos = self.pos
